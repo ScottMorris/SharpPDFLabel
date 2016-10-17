@@ -13,7 +13,8 @@ namespace SharpPDFLabel
         /// </summary>
         public enum PageSize
         {
-            A4
+            A4,
+			Letter
         }
 
         /// <summary>

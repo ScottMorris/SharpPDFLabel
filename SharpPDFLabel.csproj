@@ -50,6 +50,7 @@
     <Compile Include="Labels\A4Labels\Avery\L7160.cs" />
     <Compile Include="Labels\A4Labels\Avery\L7654.cs" />
     <Compile Include="Labels\A4Labels\Avery\L7656.cs" />
+    <Compile Include="Labels\LetterLabels\Avery\L8160.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TextChunk.cs" />
   </ItemGroup>

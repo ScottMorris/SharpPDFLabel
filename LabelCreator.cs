@@ -90,7 +90,10 @@ namespace SharpPDFLabel
                 case Enums.PageSize.A4:
                     pageSize = iTextSharp.text.PageSize.A4;
                     break;
-                default:
+				case Enums.PageSize.Letter:
+					pageSize = iTextSharp.text.PageSize.LETTER;
+					break;
+				default:
                     pageSize = iTextSharp.text.PageSize.A4;
                     break;
             }
@@ -136,8 +139,8 @@ namespace SharpPDFLabel
             /* The next 3 lines are the key to making SetWidthPercentage work */
             /* "size" specifies the size of the page that equates to 100% - even though the values passed are absolute not relative?! */
             /* (I will never get those 3 hours back) */
-            var w = iTextSharp.text.PageSize.A4.Width - (doc.LeftMargin + doc.RightMargin);
-            var h = iTextSharp.text.PageSize.A4.Height - (doc.TopMargin + doc.BottomMargin);
+            var w = pageSize.Width - (doc.LeftMargin + doc.RightMargin);
+            var h = pageSize.Height - (doc.TopMargin + doc.BottomMargin);
             var size = new iTextSharp.text.Rectangle(w, h);
 
             //Set the column widths (in points) - take note of the size parameter mentioned above
