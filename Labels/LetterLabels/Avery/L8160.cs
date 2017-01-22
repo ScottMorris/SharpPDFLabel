@@ -10,7 +10,7 @@ namespace SharpPDFLabel.Labels.LetterLabels.Avery
 	/// Per Sheet: 30 per sheet 
 	/// Inkjet code: J8160
 	/// </summary>
-	public class L8160 : Label
+	public class L8160 : LabelDefinition
     {
         public L8160()
         {

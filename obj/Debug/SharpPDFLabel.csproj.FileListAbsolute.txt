@@ -4,3 +4,4 @@ C:\Users\Scott\Source\Repos\SharpPDFLabel\bin\Debug\SharpPDFLabel.pdb
 C:\Users\Scott\Source\Repos\SharpPDFLabel\bin\Debug\itextsharp.xml
 C:\Users\Scott\Source\Repos\SharpPDFLabel\obj\Debug\SharpPDFLabel.dll
 C:\Users\Scott\Source\Repos\SharpPDFLabel\obj\Debug\SharpPDFLabel.pdb
+C:\Users\Scott\Source\Repos\SharpPDFLabel\bin\Debug\itextsharp.dll
