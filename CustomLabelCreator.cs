@@ -21,7 +21,7 @@ namespace SharpPDFLabel
         /// </summary>
         public bool IncludeLabelBorders { get; set; }
 
-        public CustomLabelCreator(LabelDefinition labelDefinition)
+		public CustomLabelCreator(LabelDefinition labelDefinition)
         {
 			FontFactory.RegisterDirectories(); //Register all local fonts
 
@@ -38,6 +38,11 @@ namespace SharpPDFLabel
         {
             _labels.Add(label);
         }
+
+		public void AddPageOffset(int pageNumber, int offset)
+		{
+			_labelDefinition.LabelsOffsetPerPage.Add(pageNumber, offset);
+		}
 
         
         
@@ -110,14 +115,16 @@ namespace SharpPDFLabel
             var size = new iTextSharp.text.Rectangle(w, h);
 
 
-            // loop over the labels
 
-            var rowNumber = 0;
+			var labels = AddLabelPadding();
+			// loop over the labels
+
+			var rowNumber = 0;
             var colNumber = 0;
 
 
             PdfPTable tbl = null;
-            foreach (var label in _labels)
+            foreach (var label in labels)
             {
                 if (rowNumber == 0)
                 {
@@ -205,7 +212,37 @@ namespace SharpPDFLabel
 
         }
 
-        private PdfPCell CreateEmptyLabelCell()
+		private IList<Label> AddLabelPadding()
+		{
+			var numRows = _labelDefinition.LabelsPerRow;
+			var numCol = _labelDefinition.LabelRowsPerPage;
+			var labelsPerPage = numRows * numCol;
+			var numPages = (_labels.Count() / labelsPerPage) + 1;
+
+			var newLabelList = new List<Label>();
+			var indexPostion = 0;
+
+			for(var i = 1; i < numPages; i++)
+			{
+				var numLabelOffset = default(int);
+				if (_labelDefinition.LabelsOffsetPerPage.TryGetValue(i, out numLabelOffset))
+				{
+					var labelsLeftOnPage = labelsPerPage - numLabelOffset;
+					newLabelList.AddRange(Enumerable.Range(0, numLabelOffset).Select(x => new Label()));
+					newLabelList.AddRange(_labels.Skip(indexPostion));
+					indexPostion += labelsLeftOnPage;
+				}
+				else
+				{
+					newLabelList.AddRange(_labels.Skip(indexPostion));
+					indexPostion += labelsPerPage;
+				}
+			}
+
+			return newLabelList;
+		}
+
+		private PdfPCell CreateEmptyLabelCell()
         {
             PdfPCell cell = new PdfPCell();
             return FormatCell(cell);

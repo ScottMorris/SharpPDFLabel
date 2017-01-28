@@ -102,13 +102,15 @@ namespace SharpPDFLabel
         /// </summary>
         public int LabelRowsPerPage { get; set; }
 
+		public IDictionary<int, int> LabelsOffsetPerPage { get; set; } = new Dictionary<int, int>();
 
-        /// <summary>
-        /// iTextSharp uses points as its units
-        /// </summary>
-        /// <param name="mm">Millimetres to convert</param>
-        /// <returns>millimetres converted to points represented by a float</returns>
-        private float mmToPoint(double mm)
+
+		/// <summary>
+		/// iTextSharp uses points as its units
+		/// </summary>
+		/// <param name="mm">Millimetres to convert</param>
+		/// <returns>millimetres converted to points represented by a float</returns>
+		private float mmToPoint(double mm)
         {
             return (float)((mm / 25.4) * 72);
         }
